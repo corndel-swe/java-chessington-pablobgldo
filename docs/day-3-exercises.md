@@ -7,7 +7,7 @@ in the module work as expected.
 We'll use junit and assertj to write our unit tests.
 
 - [ ] Have a read of the
-      [Unit Testing](https://tech-docs.corndel.com/java/testing.html)
+      [Unit Testing](https://tech-docs.corndel.com/java/unit-testing.html)
       documentation to get an idea of how to use `junit` and `assertj`.
 
 Create an empty file called `MathsTests.java` in the
