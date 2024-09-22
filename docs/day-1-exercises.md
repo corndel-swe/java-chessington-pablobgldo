@@ -23,7 +23,7 @@ Your instructions are to:
 
 - [ ] Give it a constructor that initialises `count` to `0`
 
-> > [!NOTE]
+> [!NOTE]
 >
 > Make sure your class name has a capital `C`
 
