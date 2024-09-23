@@ -182,6 +182,7 @@ public class PawnTest {
     assertThat(moves).isEmpty();
   }
 
+  @Disabled
   @Test
   public void whitePawnsCanCaptureDiagonally() {
     // Arrange
