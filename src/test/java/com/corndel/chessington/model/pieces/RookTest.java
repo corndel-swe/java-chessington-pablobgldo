@@ -23,7 +23,6 @@ public class RookTest {
     board = Board.empty();
   }
 
-  @Disabled
   @Test
   public void rookCanMoveHorizontally() {
     // Arrange
@@ -45,7 +44,6 @@ public class RookTest {
             new Move(coords, new Coordinates(3, 7)));
   }
 
-  @Disabled
   @Test
   public void rookCannotMoveToOwnSquare() {
     // Arrange
@@ -59,7 +57,6 @@ public class RookTest {
     assertThat(allowedMoves).doesNotContain(new Move(coords, coords));
   }
 
-  @Disabled
   @Test
   public void rookCanMoveVertically() {
     // Arrange

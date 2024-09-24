@@ -182,7 +182,6 @@ public class PawnTest {
     assertThat(moves).isEmpty();
   }
 
-  @Disabled
   @Test
   public void whitePawnsCanCaptureDiagonally() {
     // Arrange
@@ -202,7 +201,6 @@ public class PawnTest {
     assertThat(moves).contains(new Move(pawnCoords, enemyCoords));
   }
 
-  @Disabled
   @Test
   public void blackPawnsCanCaptureDiagonally() {
     // Arrange
@@ -222,7 +220,6 @@ public class PawnTest {
     assertThat(moves).contains(new Move(pawnCoords, enemyCoords));
   }
 
-  @Disabled
   @Test
   public void pawnsCannotMoveDiagonallyOffBoard() {
     // Arrange
@@ -245,7 +242,6 @@ public class PawnTest {
     assertThat(whiteMoves).isEmpty();
   }
 
-  @Disabled
   @Test
   public void whitePawnsCannotMoveDiagonallyNotToCapture() {
     // Arrange
@@ -267,7 +263,6 @@ public class PawnTest {
     assertThat(moves).doesNotContain(new Move(pawnCoords, otherDiagonal));
   }
 
-  @Disabled
   @Test
   public void blackPawnsCannotMoveDiagonallyNotToCapture() {
     // Arrange

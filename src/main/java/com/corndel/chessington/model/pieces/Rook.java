@@ -4,36 +4,27 @@ import com.corndel.chessington.model.Board;
 import com.corndel.chessington.model.Coordinates;
 import com.corndel.chessington.model.Move;
 import com.corndel.chessington.model.PlayerColour;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class Rook implements Piece {
-
-  private final Piece.PieceType type;
-  protected final PlayerColour colour;
+public class Rook extends AbstractPiece implements Piece {
 
   public Rook(PlayerColour colour) {
-    this.type = PieceType.ROOK;
-    this.colour = colour;
-  }
-
-  @Override
-  public Piece.PieceType getType() {
-    return type;
-  }
-
-  @Override
-  public PlayerColour getColour() {
-    return colour;
-  }
-
-  @Override
-  public String toString() {
-    return colour.toString() + " " + type.toString();
+    super(PieceType.ROOK, colour);
   }
 
   @Override
   public List<Move> getAllowedMoves(Coordinates from, Board board) {
-    // TODO Implement this!
-    return List.of();
+    var allowedMoves = new ArrayList<Move>();
+    for (int i=0; i<8; i++) {
+      // 1st part of the loop gets all horizontal moves
+      if (i != from.getCol()) {
+        allowedMoves.add(new Move (from, new Coordinates(from.getRow(), i)));}
+      // 2nd part of the loop gets all vertical moves
+      if (i != from.getRow()) {
+      allowedMoves.add(new Move (from, new Coordinates(i, from.getCol())));}}
+
+    return allowedMoves;
   }
 }

@@ -9,65 +9,35 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pawn implements Piece {
+public class Pawn extends AbstractPiece implements Piece {
 
-  private final Piece.PieceType type;
-  protected final PlayerColour colour;
 
   public Pawn(PlayerColour colour) {
-    this.type = PieceType.PAWN;
-    this.colour = colour;
-  }
-
-  @Override
-  public Piece.PieceType getType() {
-    return type;
-  }
-
-  @Override
-  public PlayerColour getColour() {
-    return colour;
-  }
-
-  @Override
-  public String toString() {
-    return colour.toString() + " " + type.toString();
+    super(PieceType.PAWN, colour);
   }
 
   @Override
   public List<Move> getAllowedMoves(Coordinates from, Board board) {
     var allowedMoves = new ArrayList<Move>();
-    if (getColour().equals(PlayerColour.WHITE) && from.getRow() > 0) {
-      var destination = from.plus(-1, 0);
-      if (board.get(destination) == null) {
-        allowedMoves.add(new Move(from, destination));
-      }
-        if (from.getRow() == 6) {
-          var extra_destination = from.plus(-2, 0);
-          if (board.get(extra_destination) == null) {
-            allowedMoves.add(new Move(from, extra_destination));
-          }
-        }
-// Attempt at doing the diagonal bit
-//        if (board.get(from.plus(-1, -1)) != null) {
-//          allowedMoves.add(new Move(from, from.plus(-1, -1)));
-//        }
-//      if (board.get(from.plus(-1, 1)) != null) {
-//        allowedMoves.add(new Move(from, from.plus(-1, 1)));
-//      }
+    int direction = getColour().equals(PlayerColour.WHITE) ? -1 : 1;
+    Coordinates destination = from.plus(direction, 0);
 
-    } else if (getColour().equals(PlayerColour.BLACK) && from.getRow() < 7){
-        var destination = from.plus(1, 0);
-      if (board.get(destination) == null) {
-        allowedMoves.add(new Move(from, destination));
+    if (from.getRow() > 0 && from.getRow() < 7 && board.get(destination) == null) {
+      allowedMoves.add(new Move(from, destination));
+      // Adds 2-step move if pawn hasn't moved yet
+      Coordinates extra = destination.plus(direction, 0);
+      if (board.get(extra) == null && (from.getRow() == 6 && getColour() == PlayerColour.WHITE) || (from.getRow() == 1 && getColour() == PlayerColour.BLACK)) {
+        allowedMoves.add(new Move(from, extra));
       }
-        if (from.getRow() == 1) {
-          var extra_destination = from.plus(2, 0);
-          if (board.get(extra_destination) == null) {
-            allowedMoves.add(new Move(from, extra_destination));
-          }
+      // Calculate possible enemy attacks
+      List<Coordinates> possible = List.of(from.plus(direction, 1), from.plus(direction, -1));
+      List<Coordinates> enemies = possible.stream().filter(x -> board.get(x) != null && board.get(x).getColour() != getColour()).toList();
+      if (!enemies.isEmpty()) {
+        for (Coordinates coords : enemies) {
+          allowedMoves.add(new Move(from, coords));
         }
       }
+    }
     return allowedMoves;
   }
 }

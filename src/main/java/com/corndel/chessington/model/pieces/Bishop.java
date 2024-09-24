@@ -4,31 +4,14 @@ import com.corndel.chessington.model.Board;
 import com.corndel.chessington.model.Coordinates;
 import com.corndel.chessington.model.Move;
 import com.corndel.chessington.model.PlayerColour;
+import net.bytebuddy.implementation.bind.annotation.Super;
+
 import java.util.List;
 
-public class Bishop implements Piece {
-
-  private final Piece.PieceType type;
-  protected final PlayerColour colour;
+public class Bishop extends AbstractPiece implements Piece {
 
   public Bishop(PlayerColour colour) {
-    this.type = PieceType.BISHOP;
-    this.colour = colour;
-  }
-
-  @Override
-  public Piece.PieceType getType() {
-    return type;
-  }
-
-  @Override
-  public PlayerColour getColour() {
-    return colour;
-  }
-
-  @Override
-  public String toString() {
-    return colour.toString() + " " + type.toString();
+    super(PieceType.BISHOP, colour);
   }
 
   @Override
