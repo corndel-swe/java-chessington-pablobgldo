@@ -48,15 +48,13 @@ public class Pawn implements Piece {
             allowedMoves.add(new Move(from, extra_destination));
           }
         }
-
-        if (board.get(from.plus(-1, -1)) != null) {
-          allowedMoves.add(new Move(from, from.plus(-1, -1)));
-        }
-      if (board.get(from.plus(-1, 1)) != null) {
-        allowedMoves.add(new Move(from, from.plus(-1, 1)));
-      }
-
-
+// Attempt at doing the diagonal bit
+//        if (board.get(from.plus(-1, -1)) != null) {
+//          allowedMoves.add(new Move(from, from.plus(-1, -1)));
+//        }
+//      if (board.get(from.plus(-1, 1)) != null) {
+//        allowedMoves.add(new Move(from, from.plus(-1, 1)));
+//      }
 
     } else if (getColour().equals(PlayerColour.BLACK) && from.getRow() < 7){
         var destination = from.plus(1, 0);
