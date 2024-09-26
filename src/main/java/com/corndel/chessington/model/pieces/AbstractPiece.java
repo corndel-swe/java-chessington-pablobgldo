@@ -18,7 +18,7 @@ public abstract class AbstractPiece implements Piece {
     return this.colour;
   }
 
-  public String toString() {return colour.toString() + " " + type.toString();
+  public String toString() {return this.colour.toString() + " " + this.type.toString();
   }
 
 }
