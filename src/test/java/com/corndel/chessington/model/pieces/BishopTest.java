@@ -23,7 +23,6 @@ public class BishopTest {
     board = Board.empty();
   }
 
-  @Disabled
   @Test
   public void bishopCanMoveDiagonally() {
     // Arrange
@@ -51,7 +50,6 @@ public class BishopTest {
             new Move(coords, new Coordinates(0, 7)));
   }
 
-  @Disabled
   @Test
   public void bishopCanCaptureOpposingPiece() {
     // Arrange
@@ -69,7 +67,6 @@ public class BishopTest {
     assertThat(allowedMoves).contains(new Move(coords, opponentCoords));
   }
 
-  @Disabled
   @Test
   public void bishopCannotMoveThroughOpposingPiece() {
     // Arrange
@@ -89,7 +86,6 @@ public class BishopTest {
             new Move(coords, new Coordinates(1, 1)), new Move(coords, new Coordinates(0, 0)));
   }
 
-  @Disabled
   @Test
   public void bishopIsBlockedByFriendlyPiece() {
     // Arrange

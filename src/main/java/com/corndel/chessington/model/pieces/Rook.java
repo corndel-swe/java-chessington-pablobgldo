@@ -4,36 +4,53 @@ import com.corndel.chessington.model.Board;
 import com.corndel.chessington.model.Coordinates;
 import com.corndel.chessington.model.Move;
 import com.corndel.chessington.model.PlayerColour;
+
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Rook implements Piece {
-
-  private final Piece.PieceType type;
-  protected final PlayerColour colour;
+public class Rook extends AbstractPiece implements Piece {
 
   public Rook(PlayerColour colour) {
-    this.type = PieceType.ROOK;
-    this.colour = colour;
-  }
-
-  @Override
-  public Piece.PieceType getType() {
-    return type;
-  }
-
-  @Override
-  public PlayerColour getColour() {
-    return colour;
-  }
-
-  @Override
-  public String toString() {
-    return colour.toString() + " " + type.toString();
+    super(PieceType.ROOK, colour);
   }
 
   @Override
   public List<Move> getAllowedMoves(Coordinates from, Board board) {
-    // TODO Implement this!
-    return List.of();
+    var allowedMoves = new ArrayList<Move>();
+
+    List<int[]> directions = List.of(
+            new int[]{-1, 0},
+            new int[]{1, 0},
+            new int[]{0, -1},
+            new int[]{0, 1}
+    );
+
+    for (int[] dir : directions) {
+      int row = from.getRow();
+      int col = from.getCol();
+      int rowDiff = dir[0];
+      int colDiff = dir[1];
+
+      while (true) {
+        row += rowDiff;
+        col += colDiff;
+        if (row < 0 || row > 7 || col < 0 || col > 7) {
+          break;
+        }
+
+        Coordinates dest = new Coordinates(row, col);
+        if (!dest.equals(from)) {
+          if (board.get(dest) == null || !board.get(dest).getColour().equals(getColour())) {
+            allowedMoves.add(new Move(from, dest));
+          }
+          if (board.get(dest) != null) {
+            break;
+          }
+        }
+      }
+    }
+
+    return allowedMoves;
   }
 }
